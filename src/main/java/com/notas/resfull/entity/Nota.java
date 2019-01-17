@@ -2,10 +2,11 @@ package com.notas.resfull.entity;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name="NOTA")
 @Entity
-public class Nota {
+public class Nota implements Serializable {
     @GeneratedValue
     @Id
     @Column(name="ID_NOTA")
