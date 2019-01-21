@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,9 +27,13 @@ public class UsuarioServis implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    	
+    	PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    	
         Usuario user = repo.findByUsuario(username);
-        return new User(user.getUsuario() , user.getContrasena() , user.isActivo()  , user.isActivo()  ,user.isActivo() , user.isActivo() , buildgranted(user.getRol()));
-    }
+        return new User(user.getUsuario() ,  encoder.encode(user.getContrasena()) , user.isActivo()  , 
+        user.isActivo()  ,user.isActivo() , user.isActivo() , buildgranted(user.getRol()));
+    }    
 
     public List<GrantedAuthority> buildgranted(byte rol) {
         String[] roles = {"LECTOR" ,"USUARIO" , "ADMINISTRADOR"};
@@ -38,5 +44,6 @@ public class UsuarioServis implements UserDetailsService {
         }
 
         return auths;
-    }
+    }    
+    
 }

@@ -30,7 +30,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
         InputStream body = httpServletRequest.getInputStream();
         Usuario user = new ObjectMapper().readValue(body , Usuario.class);
 
-
+        
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getUsuario(),
@@ -42,6 +42,6 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest req , HttpServletResponse res , FilterChain chain , Authentication auth) throws IOException , ServletException{
-        JwtUtil.addAuthentication((HttpServletResponse) req, auth.getName());
+        JwtUtil.addAuthentication((HttpServletResponse) res, auth.getName());
     }
 }

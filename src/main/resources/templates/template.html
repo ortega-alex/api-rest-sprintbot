@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Notas</title>
+	
+	<!-- BOOTSTRAP 4 -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+<body>
+
+	<div class="container"> 
+		<div class="row">
+			<div class="col-12">
+				<table class="table">
+				  <thead class="thead-dark">
+				    <tr>
+				      <th scope="col">No.</th>
+				      <th scope="col">Nombre</th>
+				      <th scope="col">Titulo</th>
+				      <th scope="col">Contenido</th>
+				    </tr>
+				  </thead>
+				  <tbody th:each='nota : ${notas}'>
+				  	<tr>
+				  		<th th:text="${nota.getId()}"></th>
+				  		<th th:text="${nota.getNombre()}"></th>
+				  		<th th:text="${nota.getTitulo()}"></th>
+				  		<th th:text="${nota.getContenido()}"></th>
+				  	</tr>
+				  </tbody>
+				</table>
+			</div>
+		</div>	
+	</div>
+
+</body>
+</html>
